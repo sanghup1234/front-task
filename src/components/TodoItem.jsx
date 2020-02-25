@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import styled from "styled-components";
 
 const ListWrap = styled.li`
@@ -15,6 +15,7 @@ const ListBox = styled.div`
   font-weight: 300;
 
   .todo-title {
+    width: 75%;
     font-size: 1.5rem;
 
     &.done {
@@ -23,35 +24,53 @@ const ListBox = styled.div`
     }
   }
 
-  .btn {
-    cursor: pointer;
-    padding: 0.5rem 0.75rem;
-    border-radius: 3px;
-    margin: 0 2px;
-    transition: background-color 0.2s;
+  .btn-wrap {
+    width: 25%;
 
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.05);
-    }
+    .btn {
+      cursor: pointer;
+      padding: 0.5rem 0.75rem;
+      border-radius: 3px;
+      margin: 0 2px;
+      transition: background-color 0.2s;
 
-    &-delete {
-      color: #e74c3c;
-    }
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
 
-    &-update {
-      color: #3498db;
+      &-delete {
+        color: #e74c3c;
+      }
+
+      &-update {
+        color: #3498db;
+      }
     }
   }
 `;
 
-const TodoItem = ({ title, checked, onChange, onRemove, onToggle }) => {
+const TodoItem = ({ idx, title, checked, onDelete, onToggle, onUpdate }) => {
+  const [isChange, setIsChange] = useState(false);
+
+  const handleToggle = () => {
+    onToggle(idx);
+  };
+
+  const handleDelete = () => {
+    onDelete(idx);
+  };
+
+  const handleChangeToggle = () => {
+    setIsChange(!isChange);
+  }
+
   return (
     <ListWrap>
       <ListBox>
-        <p className={`todo-title ${checked ? "done" : ""}`}>{title}</p>
-        <div>
-          <span className="btn btn-update">수정</span>
-          <span className="btn btn-delete">삭제</span>
+        <p className={`todo-title ${checked ? "done" : ""}`} onClick={handleToggle}>{title}</p>
+        <div className="btn-wrap">
+          <span className="btn btn-update" onClick={handleChangeToggle}>수정</span>
+          <span className="btn btn-delete" onClick={handleDelete}>삭제</span>
         </div>
       </ListBox>
     </ListWrap>

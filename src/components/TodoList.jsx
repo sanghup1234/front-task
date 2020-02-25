@@ -1,16 +1,17 @@
 import React from "react";
 import TodoItem from "./TodoItem";
 
-const TodoList = ({ todos, onRemove, onChange, onToggle }) => {
+const TodoList = ({ todos, onDelete, onUpdate, onToggle }) => {
   return (
     <ul>
       {todos.map(({ title, checked }, idx) => (
         <TodoItem
           key={idx}
+          idx={idx}
           title={title}
           checked={checked}
-          onRemove={onRemove}
-          onChange={onChange}
+          onDelete={onDelete}
+          onUpdate={onUpdate}
           onToggle={onToggle}
         />
       ))}

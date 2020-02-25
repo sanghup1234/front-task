@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import TodoList from "./TodoList";
+import TodoInput from "./TodoInput";
 
 const TodoWrap = styled.div`
   display: flex;
@@ -25,37 +26,18 @@ const TodoBox = styled.div`
   box-shadow: 1px 2px 5px 0 rgba(0, 0, 0, 0.1);
 `;
 
-const TodoInput = styled.input`
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid #efefef;
-  outline: none;
-  padding: 15px;
-  font-size: 2rem;
-  font-weight: 300;
-
-  &::placeholder {
-    color: #ddd;
-  }
-`;
-
-const TodoTemplate = ({ todos, onUpdate, onDelete, onToggle }) => {
-  const [input, setInput] = useState("");
-
-  const handleChange = e => {
-    setInput(e.target.value);
-  };
-
+const TodoTemplate = ({ todos, onCreate, onUpdate, onDelete, onToggle }) => {
   return (
     <TodoWrap>
       <TodoTitle>Todos</TodoTitle>
       <TodoBox>
-        <TodoInput
-          placeholder="무엇을 해야하나요?"
-          value={input}
-          onChange={handleChange}
+        <TodoInput onSubmit={onCreate} />
+        <TodoList 
+          todos={todos} 
+          onToggle={onToggle} 
+          onDelete={onDelete} 
+          onUpdate={onUpdate}  
         />
-        <TodoList todos={todos} />
       </TodoBox>
     </TodoWrap>
   );
