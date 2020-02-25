@@ -8,7 +8,7 @@ const TodoWrap = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 10rem;
+  padding: 10rem 0;
 `;
 
 const TodoTitle = styled.h1`
@@ -20,8 +20,8 @@ const TodoTitle = styled.h1`
 `;
 
 const TodoBox = styled.div`
-  width: 500px;
-  max-width: 90%;
+  width: 600px;
+  max-width: 95%;
   background-color: #fff;
   box-shadow: 1px 2px 5px 0 rgba(0, 0, 0, 0.1);
 `;
@@ -32,11 +32,11 @@ const TodoTemplate = ({ todos, onCreate, onUpdate, onDelete, onToggle }) => {
       <TodoTitle>Todos</TodoTitle>
       <TodoBox>
         <TodoInput onSubmit={onCreate} />
-        <TodoList 
-          todos={todos} 
-          onToggle={onToggle} 
-          onDelete={onDelete} 
-          onUpdate={onUpdate}  
+        <TodoList
+          todos={todos}
+          onToggle={onToggle}
+          onDelete={onDelete}
+          onUpdate={onUpdate}
         />
       </TodoBox>
     </TodoWrap>

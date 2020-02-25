@@ -12,21 +12,18 @@ export const toggleTodo = createAction(TOGGLE_TODO);
 export const deleteTodo = createAction(DELETE_TODO);
 
 const initialState = {
-  todos: [
-    { title: "이거 해야지", checked: false },
-    { title: "숙제하기", checked: true }
-  ]
+  todos: []
 };
 
 const reducer = (state = initialState, action) => {
   return produce(state, draft => {
     switch (action.type) {
       case CREATE_TODO:
-        draft.todos.push({ 
+        draft.todos.push({
           title: action.payload.title,
-          checked: false,
+          checked: false
         });
-        
+
         return draft;
 
       case UPDATE_TODO:
@@ -35,7 +32,9 @@ const reducer = (state = initialState, action) => {
         return draft;
 
       case TOGGLE_TODO:
-        draft.todos[action.payload.idx].checked = !draft.todos[action.payload.idx].checked;
+        draft.todos[action.payload.idx].checked = !draft.todos[
+          action.payload.idx
+        ].checked;
 
         return draft;
 

@@ -1,7 +1,9 @@
 import React, { memo, useState } from "react";
 import styled from "styled-components";
+import TodoInput from "./TodoInput";
 
 const ListWrap = styled.li`
+  position: relative;
   cursor: pointer;
   border-bottom: 1px solid #efefef;
 `;
@@ -13,6 +15,11 @@ const ListBox = styled.div`
   background-color: #fff;
   padding: 1rem;
   font-weight: 300;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #f9f9f9;
+  }
 
   .todo-title {
     width: 75%;
@@ -62,16 +69,36 @@ const TodoItem = ({ idx, title, checked, onDelete, onToggle, onUpdate }) => {
 
   const handleChangeToggle = () => {
     setIsChange(!isChange);
-  }
+  };
+
+  const handleUpdate = payload => {
+    setIsChange(false);
+    onUpdate(payload);
+  };
 
   return (
     <ListWrap>
       <ListBox>
-        <p className={`todo-title ${checked ? "done" : ""}`} onClick={handleToggle}>{title}</p>
-        <div className="btn-wrap">
-          <span className="btn btn-update" onClick={handleChangeToggle}>수정</span>
-          <span className="btn btn-delete" onClick={handleDelete}>삭제</span>
-        </div>
+        {isChange ? (
+          <TodoInput onSubmit={handleUpdate} idx={idx} value={title} />
+        ) : (
+          <>
+            <p
+              className={`todo-title ${checked ? "done" : ""}`}
+              onClick={handleToggle}
+            >
+              {title}
+            </p>
+            <div className="btn-wrap">
+              <span className="btn btn-update" onClick={handleChangeToggle}>
+                수정
+              </span>
+              <span className="btn btn-delete" onClick={handleDelete}>
+                삭제
+              </span>
+            </div>
+          </>
+        )}
       </ListBox>
     </ListWrap>
   );

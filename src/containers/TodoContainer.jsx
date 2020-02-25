@@ -10,24 +10,36 @@ const TodoContainer = () => {
   const { todos } = useSelector(state => state.todo);
 
   // Create
-  const handleCreate = useCallback(({ title }) => {
-    dispatch(todoActions.createTodo({ title }));
-  }, [dispatch]);
+  const handleCreate = useCallback(
+    payload => {
+      dispatch(todoActions.createTodo(payload));
+    },
+    [dispatch]
+  );
 
   // Update
-  const handleUpdate = useCallback((title, idx) => {
-    dispatch(todoActions.updateTodo({ title, idx }))
-  }, [dispatch]);
+  const handleUpdate = useCallback(
+    payload => {
+      dispatch(todoActions.updateTodo(payload));
+    },
+    [dispatch]
+  );
 
   // Delete
-  const handleDelete = useCallback(idx => {
-    dispatch(todoActions.deleteTodo({ idx }));
-  }, [dispatch]);
+  const handleDelete = useCallback(
+    idx => {
+      dispatch(todoActions.deleteTodo({ idx }));
+    },
+    [dispatch]
+  );
 
   // Toggle
-  const handleToggle = useCallback(idx => {
-    dispatch(todoActions.toggleTodo({ idx }));
-  }, [dispatch]);
+  const handleToggle = useCallback(
+    idx => {
+      dispatch(todoActions.toggleTodo({ idx }));
+    },
+    [dispatch]
+  );
 
   return (
     <TodoTemplate

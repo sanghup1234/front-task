@@ -15,8 +15,9 @@ const Input = styled.input`
   }
 `;
 
-const TodoInput = ({ onSubmit, idx }) => {
-  const [title, setTitle] = useState("");
+const TodoInput = ({ idx, onSubmit, value = "" }) => {
+  console.log(idx);
+  const [title, setTitle] = useState(value);
 
   const handleChange = e => {
     setTitle(e.target.value);
@@ -24,10 +25,10 @@ const TodoInput = ({ onSubmit, idx }) => {
 
   const handleKeyDown = e => {
     if (e.keyCode === 13 && title.trim()) {
-      onSubmit(idx ? { title, idx } : { title });
-      setTitle('');
+      onSubmit({ title, idx });
+      setTitle("");
     }
-  }
+  };
 
   return (
     <Input
@@ -36,7 +37,7 @@ const TodoInput = ({ onSubmit, idx }) => {
       onChange={handleChange}
       onKeyDown={handleKeyDown}
     />
-  )
-}
+  );
+};
 
-export default TodoInput
+export default TodoInput;
