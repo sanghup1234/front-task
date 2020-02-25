@@ -22,14 +22,26 @@ const reducer = (state = initialState, action) => {
   return produce(state, draft => {
     switch (action.type) {
       case CREATE_TODO:
+        draft.todos.push({ 
+          title: action.payload.title,
+          checked: false,
+        });
+        
         return draft;
 
       case UPDATE_TODO:
-        draft.comment = { ...action.items };
+        draft.todos[action.payload.idx].title = action.payload.title;
 
         return draft;
 
       case TOGGLE_TODO:
+        draft.todos[action.payload.idx].checked = !draft.todos[action.payload.idx].checked;
+
+        return draft;
+
+      case DELETE_TODO:
+        draft.todos.splice(action.payload.idx, 1);
+
         return draft;
     }
   });
