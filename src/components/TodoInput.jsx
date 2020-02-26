@@ -16,7 +16,6 @@ const Input = styled.input`
 `;
 
 const TodoInput = ({ idx, onSubmit, value = "" }) => {
-  console.log(idx);
   const [title, setTitle] = useState(value);
 
   const handleChange = e => {
