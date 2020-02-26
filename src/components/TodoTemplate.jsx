@@ -8,7 +8,7 @@ const TodoWrap = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 10rem 0;
+  padding: 5rem 0;
 `;
 
 const TodoTitle = styled.h1`
